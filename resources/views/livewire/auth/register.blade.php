@@ -26,6 +26,23 @@
             placeholder="email@example.com"
         />
 
+        <!-- Kode Rooms -->
+        <flux:select
+            wire:model="kode_rooms"
+            :label="__('Kode Rooms')"
+            required
+            >
+            <option value="">{{ __('Select a room') }}</option>
+            @foreach ($rooms as $room)
+                <option value="{{ $room['kode_rooms'] }}">
+                    {{ $room['kode_rooms'] }} - {{ $room['jurusan']['nama_jurusan'] ?? '' }}
+                </option>
+            @endforeach
+        </flux:select>
+        @error('kode_rooms')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+
         <!-- Password -->
         <flux:input
             wire:model="password"

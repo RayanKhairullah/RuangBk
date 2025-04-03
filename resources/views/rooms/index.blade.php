@@ -28,6 +28,11 @@
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('{{ __('Are you sure?') }}')">{{ __('Delete') }}</button>
                         </form>
                     </td>
+                    <td>
+                        <a href="{{ route('rooms.show', $room->id) }}" class="btn btn-sm btn-primary">
+                            {{ __('View') }}
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

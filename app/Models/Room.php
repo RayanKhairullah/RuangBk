@@ -15,4 +15,8 @@ class Room extends Model
     {
         return $this->belongsTo(Jurusan::class);
     }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'kode_rooms', 'kode_rooms');
+    }
 }

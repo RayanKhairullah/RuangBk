@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'role',
+        'kode_rooms',
     ];
 
     /**
@@ -63,5 +64,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function biodata()
     {
         return $this->hasOne(Biodata::class);
+    }
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'kode_rooms', 'kode_rooms');
     }
 }

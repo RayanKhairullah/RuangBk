@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified', 'teacher'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('jurusans', JurusanController::class);
     Route::resource('rooms', RoomController::class);
+    Route::get('rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 });
 
 

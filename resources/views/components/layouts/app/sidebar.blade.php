@@ -25,7 +25,7 @@
                     @endif
 
                     @if (auth()->user()->role === App\Enums\UserRole::User)
-                        <flux:navlist.item icon="list-bullet" :href="route('biodatas.create')" wire:navigate>{{ __('Biodata') }}</flux:navlist.item>
+                        <flux:navlist.item icon="list-bullet" :href="route('biodatas.show')" wire:navigate>{{ __('Biodata') }}</flux:navlist.item>
                         <flux:navlist.item icon="list-bullet" :href="route('dashboard')" wire:navigate>{{ __('Konseling') }}</flux:navlist.item>
                         <flux:navlist.item icon="list-bullet" :href="route('dashboard')" wire:navigate>{{ __('Catatan Prilaku') }}</flux:navlist.item>
                     @endif
