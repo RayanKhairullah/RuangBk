@@ -20,14 +20,14 @@
                         <flux:navlist.item icon="list-bullet" :href="route('rooms.index')" wire:navigate>{{ __('Rooms') }}</flux:navlist.item>
                         <flux:navlist.item icon="list-bullet" :href="route('jurusans.index')" wire:navigate>{{ __('Jurusan') }}</flux:navlist.item>
                         <flux:navlist.item icon="list-bullet" :href="route('penjadwalan.index')" wire:navigate>{{ __('Konseling') }}</flux:navlist.item>
-                        <flux:navlist.item icon="list-bullet" :href="route('dashboard')" wire:navigate>{{ __('Catatan Prilaku') }}</flux:navlist.item>
+                        <flux:navlist.item icon="list-bullet" :href="route('catatans.index')" wire:navigate>{{ __('Catatan Prilaku') }}</flux:navlist.item>
                         <flux:navlist.item icon="list-bullet" :href="route('dashboard')" wire:navigate>{{ __('Laporan') }}</flux:navlist.item>
                     @endif
 
                     @if (auth()->user()->role === App\Enums\UserRole::User)
                         <flux:navlist.item icon="list-bullet" :href="route('biodatas.show')" wire:navigate>{{ __('Biodata') }}</flux:navlist.item>
                         <flux:navlist.item icon="list-bullet" :href="route('penjadwalan.index')" wire:navigate>{{ __('Konseling') }}</flux:navlist.item>
-                        <flux:navlist.item icon="list-bullet" :href="route('dashboard')" wire:navigate>{{ __('Catatan Prilaku') }}</flux:navlist.item>
+                        <flux:navlist.item icon="list-bullet" :href="route('catatans.index')" wire:navigate>{{ __('Catatan Prilaku') }}</flux:navlist.item>
                     @endif
 
                 </flux:navlist.group>

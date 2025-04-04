@@ -9,6 +9,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\PenjadwalanKonselingController;
+use App\Http\Controllers\CatatanController;
 
 //Users Routes
 Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('biodatas', [BiodataController::class, 'show'])->name('biodatas.show');
     Route::resource('penjadwalan', PenjadwalanKonselingController::class);
     Route::post('penjadwalan/{penjadwalan}/send', [PenjadwalanKonselingController::class, 'send'])->name('penjadwalan.send');
+    Route::resource('catatans', CatatanController::class);
 });
 
 
