@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\PenjadwalanKonselingController;
 
 //Users Routes
 Route::get('/', function () {
@@ -24,6 +25,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('biodatas/edit', [BiodataController::class, 'edit'])->name('biodatas.edit');
     Route::put('biodatas', [BiodataController::class, 'update'])->name('biodatas.update');
     Route::get('biodatas', [BiodataController::class, 'show'])->name('biodatas.show');
+    Route::resource('penjadwalan', PenjadwalanKonselingController::class);
+    Route::post('penjadwalan/{penjadwalan}/send', [PenjadwalanKonselingController::class, 'send'])->name('penjadwalan.send');
 });
 
 
