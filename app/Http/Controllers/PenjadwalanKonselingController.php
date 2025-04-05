@@ -32,10 +32,7 @@ class PenjadwalanKonselingController extends Controller
             $users = User::where('role', UserRole::Teacher)->get();
         }
         return view('penjadwalan.create', compact('users'));
-        
-        // return view('penjadwalan.create');
     }
-
 
     public function store(Request $request)
     {
@@ -106,27 +103,6 @@ class PenjadwalanKonselingController extends Controller
     
         return redirect()->route('penjadwalan.index')->with('success', 'Jadwal berhasil dikirim ke email penerima.');
     }
-
-    // public function search(Request $request)
-    // {
-    //     $role = Auth::user()->role === UserRole::Teacher->value 
-    //         ? UserRole::User->value 
-    //         : UserRole::Teacher->value;
-    
-    //     $search = $request->get('q');
-    
-    //     $users = User::where('role', $role)
-    //     ->when($search, function ($query, $search) {
-    //         $query->where(function ($q) use ($search) {
-    //             $q->where('name', 'like', '%' . $search . '%')
-    //                 ->orWhere('email', 'like', '%' . $search . '%');
-    //         });
-    //     })
-    //     ->limit(10)
-    //     ->get();
-    
-    //     return response()->json($users);
-    // }
 
     public function destroy(PenjadwalanKonseling $penjadwalan)
     {

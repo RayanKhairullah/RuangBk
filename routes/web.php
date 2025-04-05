@@ -16,7 +16,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Route::get('/api/users/search', [UserController::class, 'search'])->name('api.users.search');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

@@ -3,13 +3,17 @@
 
     <form action="{{ route('catatans.store') }}" method="POST" class="mt-4">
         @csrf
-        <!-- Pilih Siswa -->
+        <!-- Pilih Penerima -->
         <div class="mb-4">
-            <label for="user_id" class="block text-sm font-medium text-gray-700">{{ __('Pilih Siswa') }}</label>
-            <select name="user_id" id="user_id" class="form-input w-full" required>
-                <option value="">{{ __('Pilih Siswa') }}</option>
+            <label for="user_id" class="block text-sm font-medium text-gray-700">
+                {{ __('Pilih Penerima') }}
+            </label>
+            <select name="user_id" id="user_id" class="form-input w-full select2" required>
+                <option value="">{{ __('Pilih Penerima') }}</option>
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->email }})</option>
+                    <option value="{{ $user->id }}">
+                        {{ $user->name }} ({{ $user->email }})
+                    </option>
                 @endforeach
             </select>
         </div>

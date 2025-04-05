@@ -142,7 +142,22 @@
         </flux:header>
 
         {{ $slot }}
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            function initSelect2() {
+                $('.select2').select2({
+                    placeholder: "{{ __('Pilih Penerima') }}",
+                    allowClear: true,
+                });
+            }
+        
+            // Inisialisasi saat halaman pertama dimuat
+            $(document).ready(initSelect2);
+        
+            // Inisialisasi ulang setelah Livewire navigasi
+            document.addEventListener('livewire:navigated', initSelect2);
+        </script>
         @fluxScripts
     </body>
 </html>
