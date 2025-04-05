@@ -20,7 +20,9 @@
             <select name="room_id" id="room_id" class="form-input w-full" required>
                 <option value="">{{ __('Pilih Room') }}</option>
                 @foreach ($rooms as $room)
-                    <option value="{{ $room->id }}">{{ $room->tingkatan_rooms }}</option>
+                    <option value="{{ $room->id }}">
+                        {{ $room->jurusan->nama_jurusan }} - {{ $room->tingkatan_rooms }}
+                    </option>
                 @endforeach
             </select>
         </div>

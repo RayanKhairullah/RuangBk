@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole; 
 use App\Models\PenjadwalanKonseling;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,9 +23,19 @@ class PenjadwalanKonselingController extends Controller
 
     public function create()
     {
-        $users = User::all();
+        // Asumsikan Anda menggunakan enum (App\Enums\UserRole)
+        if (Auth::user()->role === UserRole::Teacher) {
+            // Guru membuat jadwal, tampilkan dropdown dengan data siswa saja
+            $users = User::where('role', UserRole::User)->get();
+        } else {
+            // User membuat jadwal, tampilkan dropdown dengan data guru saja
+            $users = User::where('role', UserRole::Teacher)->get();
+        }
         return view('penjadwalan.create', compact('users'));
+        
+        // return view('penjadwalan.create');
     }
+
 
     public function store(Request $request)
     {
@@ -57,19 +68,28 @@ class PenjadwalanKonselingController extends Controller
 
     public function update(Request $request, PenjadwalanKonseling $penjadwalan)
     {
+        // Pastikan hanya pengirim atau penerima yang dapat mengubah data
         if (Auth::id() !== $penjadwalan->pengirim_id && Auth::id() !== $penjadwalan->penerima_id) {
             abort(403, 'Unauthorized action.');
         }
 
-        $request->validate([
+        // Validasi data umum
+        $data = $request->validate([
             'lokasi' => 'required|string|max:255',
             'tanggal' => 'required|date',
             'topik_dibahas' => 'required|string',
-            'solusi' => 'nullable|string',
-            'status' => 'nullable|in:Complete,Incomplete',
         ]);
 
-        $penjadwalan->update($request->all());
+        // Hanya guru yang bisa mengupdate solusi dan status
+        if (Auth::user()->role === UserRole::Teacher) {
+            $dataTeacher = $request->validate([
+                'solusi' => 'nullable|string',
+                'status' => 'nullable|in:Complete,Incomplete',
+            ]);
+            $data = array_merge($data, $dataTeacher);
+        }
+
+        $penjadwalan->update($data);
 
         return redirect()->route('penjadwalan.index')->with('success', 'Jadwal konseling berhasil diperbarui.');
     }
@@ -86,6 +106,27 @@ class PenjadwalanKonselingController extends Controller
     
         return redirect()->route('penjadwalan.index')->with('success', 'Jadwal berhasil dikirim ke email penerima.');
     }
+
+    // public function search(Request $request)
+    // {
+    //     $role = Auth::user()->role === UserRole::Teacher->value 
+    //         ? UserRole::User->value 
+    //         : UserRole::Teacher->value;
+    
+    //     $search = $request->get('q');
+    
+    //     $users = User::where('role', $role)
+    //     ->when($search, function ($query, $search) {
+    //         $query->where(function ($q) use ($search) {
+    //             $q->where('name', 'like', '%' . $search . '%')
+    //                 ->orWhere('email', 'like', '%' . $search . '%');
+    //         });
+    //     })
+    //     ->limit(10)
+    //     ->get();
+    
+    //     return response()->json($users);
+    // }
 
     public function destroy(PenjadwalanKonseling $penjadwalan)
     {

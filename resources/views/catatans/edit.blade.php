@@ -21,9 +21,10 @@
         <div class="mb-4">
             <label for="room_id" class="block text-sm font-medium text-gray-700">{{ __('Pilih Room') }}</label>
             <select name="room_id" id="room_id" class="form-input w-full" required>
+                <option value="">{{ __('Pilih Room') }}</option>
                 @foreach ($rooms as $room)
-                    <option value="{{ $room->id }}" @if($catatan->room_id == $room->id) selected @endif>
-                        {{ $room->tingkatan_rooms }}
+                    <option value="{{ $room->id }}">
+                        {{ $room->jurusan->nama_jurusan }} - {{ $room->tingkatan_rooms }}
                     </option>
                 @endforeach
             </select>

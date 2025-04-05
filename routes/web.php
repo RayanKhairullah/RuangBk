@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// Route::get('/api/users/search', [UserController::class, 'search'])->name('api.users.search');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -31,7 +33,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('catatans', CatatanController::class);
 });
 
-
 //Teachers Routes
 Route::view('teacher/dashboard', 'teacher.dashboard')
     ->middleware(['auth', 'verified', 'teacher'])
@@ -43,7 +44,6 @@ Route::middleware(['auth', 'verified', 'teacher'])->group(function () {
     Route::resource('rooms', RoomController::class);
     Route::get('rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 });
-
 
 //Settings Routes
 Route::middleware(['auth'])->group(function () {
